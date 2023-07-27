@@ -1544,3 +1544,7 @@ blockquote {
     margin-right: 0;
   }
 }
+
+.href_link {
+  color: #898989
+}
