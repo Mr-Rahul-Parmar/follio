@@ -1,77 +1,41 @@
 <?php
-// Set the recipient email address
-$to = "rahul.p@3rddigital.com";
+  /**
+  * Requires the "PHP Email Form" library
+  * The "PHP Email Form" library is available only in the pro version of the template
+  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
+  * For more info and help: https://bootstrapmade.com/php-email-form/
+  */
 
-// Set the subject of the email
-$subject = "Test Email";
+  // Replace contact@example.com with your real receiving email address
+  $receiving_email_address = 'contact@example.com';
 
-// Set the email message
-$message = "This is a test email sent using PHP with a custom SMTP server.";
+  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
+    include( $php_email_form );
+  } else {
+    die( 'Unable to load the "PHP Email Form" Library!');
+  }
 
-// SMTP server settings
-$smtpServer = 'smtp-relay.brevo.com';
-$smtpPort = 587; // Change this to the appropriate port for your SMTP server
-$smtpUsername = 'parmarrahul536@gmail.com';
-$smtpPassword = 'xsmtpsib-bd052964d2a9ada143f1c85d78ced7627b501171a25dbc35ec39d3627867bedb-GTYACkNyWJqzOSIn';
+  $contact = new PHP_Email_Form;
+  $contact->ajax = true;
 
-// Create the SMTP connection
-$smtpConn = fsockopen($smtpServer, $smtpPort, $errno, $errstr, 30);
+  $contact->to = $receiving_email_address;
+  $contact->from_name = $_POST['name'];
+  $contact->from_email = $_POST['email'];
+  $contact->subject = $_POST['subject'];
 
-if (!$smtpConn) {
-  echo "SMTP Connection failed: $errstr ($errno)";
-  exit;
-}
+  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
+  /*
+  $contact->smtp = array(
+    'host' => 'example.com',
+    'username' => 'example',
+    'password' => 'pass',
+    'port' => '587'
+  );
+  */
 
-// Wait for the SMTP server's welcome message
-fread($smtpConn, 4096);
+  $contact->add_message( $_POST['name'], 'From');
+  $contact->add_message( $_POST['email'], 'Email');
+  $contact->add_message( $_POST['message'], 'Message', 10);
 
-// Send the EHLO/HELO command
-fwrite($smtpConn, "EHLO example.com\r\n");
-fread($smtpConn, 4096);
-
-// If your SMTP server requires TLS encryption, uncomment the following lines:
-// fwrite($smtpConn, "STARTTLS\r\n");
-// fread($smtpConn, 4096);
-
-// If your SMTP server requires authentication, uncomment the following lines:
-// fwrite($smtpConn, "AUTH LOGIN\r\n");
-// fread($smtpConn, 4096);
-// fwrite($smtpConn, base64_encode($smtpUsername) . "\r\n");
-// fread($smtpConn, 4096);
-// fwrite($smtpConn, base64_encode($smtpPassword) . "\r\n");
-// fread($smtpConn, 4096);
-
-// Send the MAIL FROM command
-fwrite($smtpConn, "MAIL FROM: <sender@example.com>\r\n");
-fread($smtpConn, 4096);
-
-// Send the RCPT TO command
-fwrite($smtpConn, "RCPT TO: <$to>\r\n");
-fread($smtpConn, 4096);
-
-// Send the DATA command
-fwrite($smtpConn, "DATA\r\n");
-fread($smtpConn, 4096);
-
-// Send the email headers and body
-fwrite($smtpConn, "From: parmarrahul536@gmail.com\r\n");
-fwrite($smtpConn, "To: $to\r\n");
-fwrite($smtpConn, "Subject: $subject\r\n");
-fwrite($smtpConn, "MIME-Version: 1.0\r\n");
-fwrite($smtpConn, "Content-type: text/plain; charset=utf-8\r\n");
-fwrite($smtpConn, "\r\n");
-fwrite($smtpConn, $message . "\r\n");
-
-// Send the termination sequence
-fwrite($smtpConn, ".\r\n");
-fread($smtpConn, 4096);
-
-// Send the QUIT command
-fwrite($smtpConn, "QUIT\r\n");
-fread($smtpConn, 4096);
-
-// Close the SMTP connection
-fclose($smtpConn);
-
-echo "Email sent successfully!";
+  echo $contact->send();
 ?>

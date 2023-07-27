@@ -17,23 +17,23 @@ $('#contactForm').submit(function (e) {
    // e.preventDefault();
    var formData = new FormData(this);
 
-
    $.ajax({
       type: 'POST',
-      url: "/forms/contact.php",
+      url: "/assets/js/index.js",
       data: formData,
       cache: false,
       contentType: false,
       processData: false,
       success: function (result) {
-         buttonEnabled('.send-btn', 'Save');
+         console.log(result);
+         // buttonEnabled('.send-btn', 'Save');
          // $("#editModal").modal('hide');
          // $('#idAlertSuccessMsg').show()
          // $('#idScriptSuccessMsg').html(result.message)
          // $('#saveBtn').html('Submit');
          // $("#saveBtn").attr("disabled", false);
-         document.getElementById("vehicleForm").reset();
-         vehicle_table.DataTable().ajax.reload();
+         // document.getElementById("vehicleForm").reset();
+         // vehicle_table.DataTable().ajax.reload();
       },
       error: function (data) {
          console.log(data);

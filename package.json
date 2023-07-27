@@ -1,0 +1,23 @@
+{
+  "name": "Folio",
+  "version": "1.0.0",
+  "description": "Thanks for downloading this template!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mr-Rahul-Parmar/follio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mr-Rahul-Parmar/follio/issues"
+  },
+  "homepage": "https://github.com/Mr-Rahul-Parmar/follio#readme",
+  "dependencies": {
+    "nodemailer": "^6.9.4"
+  }
+}
