@@ -16,30 +16,34 @@ function buttonEnabled(target, html) {
 $('#contactForm').submit(function (e) {
    // e.preventDefault();
    var formData = new FormData(this);
-   if ($(this).valid()) {
-      buttonDisabled('.send-btn')
-      $.ajax({
-         type: 'POST',
-         url: "/forms/contact.php",
-         data: formData,
-         cache: false,
-         contentType: false,
-         processData: false,
-         success: function (result) {
-            buttonEnabled('.send-btn', 'Save');
-            // $("#editModal").modal('hide');
-            // $('#idAlertSuccessMsg').show()
-            // $('#idScriptSuccessMsg').html(result.message)
-            // $('#saveBtn').html('Submit');
-            // $("#saveBtn").attr("disabled", false);
-            document.getElementById("vehicleForm").reset();
-            vehicle_table.DataTable().ajax.reload();
-         },
-         error: function (data) {
-            console.log(data);
-         }
-      });
-   }
+
+
+   $.ajax({
+      type: 'POST',
+      url: "/forms/contact.php",
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function (result) {
+         buttonEnabled('.send-btn', 'Save');
+         // $("#editModal").modal('hide');
+         // $('#idAlertSuccessMsg').show()
+         // $('#idScriptSuccessMsg').html(result.message)
+         // $('#saveBtn').html('Submit');
+         // $("#saveBtn").attr("disabled", false);
+         document.getElementById("vehicleForm").reset();
+         vehicle_table.DataTable().ajax.reload();
+      },
+      error: function (data) {
+         console.log(data);
+      }
+   });
+
+   // if ($(this).valid()) {
+   //    buttonDisabled('.send-btn')
+   //
+   // }
 });
 
 //jQuery Validation for Form
