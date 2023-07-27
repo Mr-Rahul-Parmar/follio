@@ -14,7 +14,7 @@ function buttonEnabled(target, html) {
 }
 
 $('#contactForm').submit(function (e) {
-   e.preventDefault();
+   // e.preventDefault();
    var formData = new FormData(this);
    if ($(this).valid()) {
       buttonDisabled('.send-btn')
@@ -43,46 +43,46 @@ $('#contactForm').submit(function (e) {
 });
 
 //jQuery Validation for Form
-$(document).ready(function () {
-
-   jQuery.validator.addMethod("noSpace", function (value, element) {
-      if ($.trim(value) == '') {
-         //$(element).val("");
-         return false;
-      } else {
-         return true;
-      }
-   }, "Space are not allowed");
-
-   jQuery.validator.addMethod("lettersonly", function (value, element) {
-      return this.optional(element) || /^[a-z0-9&," "]+$/i.test(value);
-   }, "Please enter only letters");
-
-   $('#contactForm').validate({
-      rules: {
-         vehicle_name: {
-            required: {
-               depends: function () {
-                  $(this).val($(this).val().replace(/\s+/g, " "));
-                  return true;
-               }
-            },
-            lettersonly: true,
-            noSpace: true,
-            minlength: 3,
-            maxlength: 15,
-         },
-      },
-      messages: {
-         vehicle_name: {
-            required: "Vehicle name is required.",
-         },
-      },
-      errorPlacement: function (error, element) {
-         $(element).parents('.form-error').append(error);
-      },
-   });
-});
+// $(document).ready(function () {
+//
+//    jQuery.validator.addMethod("noSpace", function (value, element) {
+//       if ($.trim(value) == '') {
+//          //$(element).val("");
+//          return false;
+//       } else {
+//          return true;
+//       }
+//    }, "Space are not allowed");
+//
+//    jQuery.validator.addMethod("lettersonly", function (value, element) {
+//       return this.optional(element) || /^[a-z0-9&," "]+$/i.test(value);
+//    }, "Please enter only letters");
+//
+//    $('#contactForm').validate({
+//       rules: {
+//          vehicle_name: {
+//             required: {
+//                depends: function () {
+//                   $(this).val($(this).val().replace(/\s+/g, " "));
+//                   return true;
+//                }
+//             },
+//             lettersonly: true,
+//             noSpace: true,
+//             minlength: 3,
+//             maxlength: 15,
+//          },
+//       },
+//       messages: {
+//          vehicle_name: {
+//             required: "Vehicle name is required.",
+//          },
+//       },
+//       errorPlacement: function (error, element) {
+//          $(element).parents('.form-error').append(error);
+//       },
+//    });
+// });
 
 setInterval( findTawkAndRemove, 100 );
 
