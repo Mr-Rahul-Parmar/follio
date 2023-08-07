@@ -1593,16 +1593,4 @@ blockquote {
 .contact-details li i {
     margin-right: 10px;
 }
-
 /*Contact US End*/
-
-
-/* 3D Photo Album Start*/
-.photo-album {
-    background-color: black;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 150px;
-}
-/* 3D Photo Album End*/
