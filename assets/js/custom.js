@@ -17,3 +17,27 @@ function findTawkAndRemove() {
       }
    }
 }
+
+gapi.load('client', function () {
+   gapi.client.init({
+      apiKey: 'AIzaSyAWGoElaNihjTnfjlz9FroL5xSwOY-yTAA',
+      discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+   }).then(function () {
+      const sheets = gapi.client.sheets.spreadsheets;
+      const spreadsheetId = '1ZKWvZwTrxNysM9CZ0U4PxBlE3MTGlojSZieo4nLXoOY';
+      const sheetName = 'Sheet1';
+
+      sheets.values.get({
+         spreadsheetId: spreadsheetId,
+         range: `${sheetName}!A:C`,
+      }).then(function (response) {
+         const values = response.result.values;
+         values.forEach(img_link => {
+            const drive_img_src = 'https://drive.google.com/uc?id=';
+            if (img_link[0] == 'me') {
+               $('.me').attr('src', img_link[2]);
+            }
+         });
+      });
+   });
+});

@@ -28,6 +28,38 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+    .image-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100px;
+      height: 100px;
+      display: block;
+    }
+
+    .image-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      opacity: 0.2;
+    }
+
+    .image-wrapper:after, .loading {
+      content: '';
+      background: transparent url('assets/img/Infinity-1s.gif') center no-repeat;
+      background-size: auto 100%;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -43,8 +75,8 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link  scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link  scrollto" href="#journal">Blog</a></li>
+          <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link scrollto" href="#journal">Blog</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -82,8 +114,8 @@
 
           <div class="col-lg-4 ">
             <div class="div-img-bg">
-              <div class="about-img">
-                <img src="assets/img/me.jpg" class="img-responsive me" alt="me">
+              <div class="about-img ">
+                <img src="" class="img-responsive me image-wrapper" alt="me">
               </div>
             </div>
           </div>
@@ -439,9 +471,8 @@
 
       <p>&copy; <span id="copy_right_year"></span> All rights reserved by Rahul.</p>
 
-
       <div class="credits">
-        Designed by <a href="mailto:parmarrahul536@gmail.com" target="_blank">Rahul Parmar</a>
+        Designed by <a  class="designe_by" href="mailto:parmarrahul536@gmail.com" target="_blank">Rahul Parmar</a>
       </div>
 
     </div>
@@ -463,6 +494,9 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Google API JS File -->
+  <script src="assets/js/google-api.js"></script>
+
   <!-- Custom JS File -->
   <script src="assets/js/custom.js"></script>
 
@@ -479,35 +513,6 @@
     })();
   </script>
   <!--End of Tawk.to Script-->
-
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script>
-    gapi.load('client', function() {
-      gapi.client.init({
-        apiKey: 'AIzaSyAWGoElaNihjTnfjlz9FroL5xSwOY-yTAA',
-        discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-      }).then(function() {
-        const sheets = gapi.client.sheets.spreadsheets;
-        const spreadsheetId = '1ZKWvZwTrxNysM9CZ0U4PxBlE3MTGlojSZieo4nLXoOY';
-        const range = 'Sheet1!A2:B3';
-
-        sheets.values.get({
-          spreadsheetId: spreadsheetId,
-          range: range,
-        }).then(function(response) {
-          const values = response.result.values;
-          values.forEach(img_link => {
-            const drive_img_src = 'https://drive.google.com/uc?id=';
-
-            if(img_link[0] == 'me'){
-              $('.me').attr('src', drive_img_src + img_link[1]);
-            }
-
-          });
-        });
-      });
-    });
-  </script>
 </body>
 
 </html>
