@@ -48,10 +48,12 @@
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
+      <!-- .navbar -->
 
     </div>
-  </header><!-- End Header -->
+  </header>
+  <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <div id="hero" class="home">
@@ -65,12 +67,11 @@
           <li><a href="https://www.facebook.com/parmar007rahul" target="_blank"><i class="bi bi-facebook"></i></a></li>
           <li><a href="https://www.instagram.com/mr_rahul_parmar" target="_blank"><i class="bi bi-instagram"></i></a></li>
           <li><a href="https://wa.me/919712281485" target="_blank"><i class="bi bi-whatsapp"></i></a></li>
-          <li><a href="#" target="_blank"><i class="bi bi-snapchat"></i></a></li>
-
         </ul>
       </div>
     </div>
-  </div><!-- End Hero -->
+  </div>
+  <!-- End Hero -->
 
   <main id="main">
 
@@ -82,7 +83,7 @@
           <div class="col-lg-4 ">
             <div class="div-img-bg">
               <div class="about-img">
-                <img src="assets/img/me.jpg" class="img-responsive" alt="me">
+                <img src="assets/img/me.jpg" class="img-responsive me" alt="me">
               </div>
             </div>
           </div>
@@ -431,20 +432,15 @@
           <li><a href="https://www.instagram.com/mr_rahul_parmar" target="_blank"><i class="bi bi-instagram icon-instagram"></i></a></li>
           <li><a href="https://wa.me/919712281485" target="_blank"><i class="bi bi-whatsapp icon-whatsapp"></i></a></li>
           <li><a href="https://github.com/Mr-Rahul-Parmar/" target="_blank"><i class="bi bi-github icon-github"></i></a></li>
-          <li><a href="#" target="_blank"><i class="bi bi-snapchat icon-snapchat"></i></a></li>
+          <li><a href="#" target="_blank"><i class="bi bi-twitter icon-twitter"></i></a></li>
         </ul>
 
       </div>
 
       <p>&copy; <span id="copy_right_year"></span> All rights reserved by Rahul.</p>
 
+
       <div class="credits">
-        <!--
-        All the links in the footer should remain intact.
-        You can delete the links only if you purchased the pro version.
-        Licensing information: https://bootstrapmade.com/license/
-        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Folio
-      -->
         Designed by <a href="mailto:parmarrahul536@gmail.com" target="_blank">Rahul Parmar</a>
       </div>
 
@@ -484,6 +480,34 @@
   </script>
   <!--End of Tawk.to Script-->
 
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script>
+    gapi.load('client', function() {
+      gapi.client.init({
+        apiKey: 'AIzaSyAWGoElaNihjTnfjlz9FroL5xSwOY-yTAA',
+        discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+      }).then(function() {
+        const sheets = gapi.client.sheets.spreadsheets;
+        const spreadsheetId = '1ZKWvZwTrxNysM9CZ0U4PxBlE3MTGlojSZieo4nLXoOY';
+        const range = 'Sheet1!A2:B3';
+
+        sheets.values.get({
+          spreadsheetId: spreadsheetId,
+          range: range,
+        }).then(function(response) {
+          const values = response.result.values;
+          values.forEach(img_link => {
+            const drive_img_src = 'https://drive.google.com/uc?id=';
+
+            if(img_link[0] == 'me'){
+              $('.me').attr('src', drive_img_src + img_link[1]);
+            }
+
+          });
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
